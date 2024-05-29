@@ -1,4 +1,6 @@
 #[derive(Debug, Clone)]
+
+/// Represents a queried cache result
 pub struct CacheQuery {
   pub(crate) id: String,
   pub(crate) value: Option<String>,
@@ -6,6 +8,7 @@ pub struct CacheQuery {
 }
 
 impl CacheQuery {
+  /// Parse a query from a string
   pub fn from_str(query: &str) -> Result<CacheQuery, &'static str> {
     let escaped = query.replace("\n", "");
     let parts: Vec<&str> = escaped.split(" ").collect();

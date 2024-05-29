@@ -20,17 +20,17 @@ mod tests {
 
   #[test]
   fn test_set() {
-    assert_eq!(set("1", "key", "value", None), "1 SET key value");
-    assert_eq!(set("1", "key", "value", Some(10)), "1 SET key value 10");
+    assert_eq!(set("1", "key", "value", None), "1 SET key value\n");
+    assert_eq!(set("1", "key", "value", Some(10)), "1 SET key value 10\n");
   }
 
   #[test]
   fn test_get() {
-    assert_eq!(get("1", "key"), "1 GET key");
+    assert_eq!(get("1", "key"), "1 GET key\n");
   }
 
   #[test]
   fn test_del() {
-    assert_eq!(del("1", "key"), "1 DEL key");
+    assert_eq!(del("1", "key"), "1 DELETE key\n");
   }
 }
