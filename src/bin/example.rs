@@ -1,20 +1,17 @@
-use famcache::{Famcache, Config};
+use famcache::{Config, Famcache};
 
 #[tokio::main]
-async fn main() {
-  let mut client = Famcache::new(Config::new("localhost", 3577));
+async fn main() -> Result<(), anyhow::Error> {
+    let mut client = Famcache::new(Config::new("localhost", 3577));
 
-  client.connect().await.unwrap();
+    client.connect().await?;
 
-  tokio::time::sleep(std::time::Duration::from_secs(1)).await;
+    client.set("test", "rust", None).await?;
+    client.set("test1", "rust2", None).await?;
 
-  println!("Calling 1st set");
-  client.set("test", "rust", None).await.unwrap();
+    let val = client.get("test").await?;
 
-  println!("Calling 2nd set");
-  client.set("test1", "rust2", None).await.unwrap();
+    println!("Connected to server: {:?}", val);
 
-  let val = client.get("test").await.unwrap();
-
-  println!("Connected to server: {:?}", val);
+    Ok(())
 }
