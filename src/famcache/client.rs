@@ -15,7 +15,7 @@ pub struct Famcache {
     queue: Arc<RwLock<HashMap<String, QueueResolver>>>,
     config: Config,
 
-    pub messaging: Messaging,
+    pub messaging: Arc<Messaging>,
 }
 
 impl Famcache {
@@ -33,7 +33,7 @@ impl Famcache {
             socket: Arc::new(RwLock::new(None)),
             queue: Arc::new(RwLock::new(HashMap::new())),
             config,
-            messaging: Messaging::new(Arc::new(RwLock::new(None))),
+            messaging: Arc::new(Messaging::new(Arc::new(RwLock::new(None)))),
         }
     }
 
@@ -78,6 +78,7 @@ impl Famcache {
     fn listen(&self) {
         let socket = self.socket.clone();
         let queue = self.queue.clone();
+        let messaging = self.messaging.clone();
 
         tokio::spawn(async move {
             let mut buffer = [0; 1024];
@@ -106,6 +107,15 @@ impl Famcache {
                 }
 
                 let response = String::from_utf8_lossy(&buffer[..bytes_read]);
+
+                if Messaging::is_messaging_event(&response) {
+                  let (topic, body) = Messaging::parse_body(&response);
+
+                  let _ = messaging.trigger(topic, body).await;
+
+                  continue;
+                }
+
                 let result = CacheQuery::from_str(&response);
 
                 if result.is_err() {
@@ -149,7 +159,7 @@ impl Famcache {
         let mut socket_guard = self.socket.write().await;
         *socket_guard = Some(socket);
 
-        self.messaging = Messaging::new(self.socket.clone());
+        self.messaging = Arc::new(Messaging::new(self.socket.clone()));
 
         self.listen();
 
