@@ -1,6 +1,6 @@
 use crate::{commands, query::holder::CacheQuery};
 
-use super::{resolver::QueueResolver, Config};
+use super::{messaging::Messaging, resolver::QueueResolver, Config};
 use anyhow::{Context, Result};
 use std::{collections::HashMap, sync::Arc};
 use tokio::{
@@ -14,6 +14,8 @@ pub struct Famcache {
     socket: Arc<RwLock<Option<TcpStream>>>,
     queue: Arc<RwLock<HashMap<String, QueueResolver>>>,
     config: Config,
+
+    pub messaging: Messaging,
 }
 
 impl Famcache {
@@ -31,6 +33,7 @@ impl Famcache {
             socket: Arc::new(RwLock::new(None)),
             queue: Arc::new(RwLock::new(HashMap::new())),
             config,
+            messaging: Messaging::new(Arc::new(RwLock::new(None))),
         }
     }
 
@@ -145,6 +148,8 @@ impl Famcache {
 
         let mut socket_guard = self.socket.write().await;
         *socket_guard = Some(socket);
+
+        self.messaging = Messaging::new(self.socket.clone());
 
         self.listen();
 

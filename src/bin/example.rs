@@ -9,6 +9,8 @@ async fn main() -> Result<(), anyhow::Error> {
     client.set("test", "rust", None).await?;
     client.set("test1", "rust2", None).await?;
 
+    client.messaging.publish("hello", "payload").await?;
+
     let val = client.get("test").await?;
 
     println!("Connected to server: {:?}", val);
