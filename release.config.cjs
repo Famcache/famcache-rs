@@ -15,8 +15,6 @@ module.exports = {
       {
         "allFeatures": true,
         "check": true,
-        "checkArgs": ["--no-deps"],
-        "publishArgs": ["--no-verify"]
       }
     ]
   ],
