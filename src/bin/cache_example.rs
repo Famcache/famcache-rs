@@ -1,3 +1,5 @@
+use std::io;
+
 use famcache::{Config, Famcache};
 
 #[tokio::main]
@@ -10,7 +12,6 @@ async fn main() -> Result<(), anyhow::Error> {
     client.set("test1", "rust2", None).await?;
 
     let val = client.get("test").await?;
-
     println!("Connected to server: {:?}", val);
 
     Ok(())
