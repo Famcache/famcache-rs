@@ -1,5 +1,3 @@
-use std::io;
-
 use famcache::{Config, Famcache};
 
 #[tokio::main]
