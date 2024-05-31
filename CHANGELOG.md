@@ -1,3 +1,10 @@
+## [1.1.3](https://github.com/Famcache/famcache-rs/compare/v1.1.2...v1.1.3) (2024-05-31)
+
+
+### Bug Fixes
+
+* **ci:** Increment version on release ([1e558e1](https://github.com/Famcache/famcache-rs/commit/1e558e1eedb0409177af295da23c89abebcfb813))
+
 ## [1.1.2](https://github.com/Famcache/famcache-rs/compare/v1.1.1...v1.1.2) (2024-05-31)
 
 
