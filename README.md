@@ -1,6 +1,12 @@
 # Famcache-rs
 
+![Static Badge](https://img.shields.io/badge/Famcache-Client)
+![docs.rs](https://img.shields.io/docsrs/famcache)
+![Crates.io Total Downloads](https://img.shields.io/crates/d/famcache)
+![GitHub Release](https://img.shields.io/github/v/release/Famcache/famcache-rs)
+
 `Famcache-rs` is a Rust client for `Famcache`, a caching server written in Go. This client provides a simple interface for connecting to `Famcache` and performing basic cache operations like setting, getting, and deleting values.
+
 
 ## Features
 
