@@ -1,3 +1,10 @@
+## [1.1.5](https://github.com/Famcache/famcache-rs/compare/v1.1.4...v1.1.5) (2024-05-31)
+
+
+### Bug Fixes
+
+* **ci:** Added categories section ([10d9860](https://github.com/Famcache/famcache-rs/commit/10d986004b4da62ca4032260be7ecf548d5bd28e))
+
 ## [1.1.4](https://github.com/Famcache/famcache-rs/compare/v1.1.3...v1.1.4) (2024-05-31)
 
 
