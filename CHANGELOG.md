@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/Famcache/famcache-rs/compare/v1.1.0...v1.1.1) (2024-05-31)
+
+
+### Bug Fixes
+
+* **example:** Cleanup ([0135c80](https://github.com/Famcache/famcache-rs/commit/0135c807b263f4ed59b757344a287f0369a3aefe))
+
 # [1.1.0](https://github.com/Famcache/famcache-rs/compare/v1.0.0...v1.1.0) (2024-05-31)
 
 
