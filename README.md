@@ -17,8 +17,9 @@ cargo add famcache
 ```
 
 ## Usage
-
 Here's a quick example of how to use famcache-rs:
+
+### Cache Operations
 
 ```rust
 use famcache::{Config, Famcache};
@@ -36,6 +37,32 @@ async fn main() -> Result<(), anyhow::Error> {
 
     println!("Connected to server: {:?}", val);
 
+    Ok(())
+}
+```
+
+### Messaging
+```rust
+use anyhow::Result;
+use famcache::{Config, Famcache};
+
+#[tokio::main]
+async fn main() -> Result<()> {
+    let mut client = Famcache::new(Config::new("localhost", 3577));
+
+    client.connect().await?;
+
+    let mut subscription = client.messaging.subscribe("topic1").await?;
+
+    tokio::spawn(async move {
+        loop {
+            let message = subscription.recv().await.unwrap();
+            println!("Received message: {}", message);
+        }
+    })
+    .await?;
+
+    client.messaging.unsubscribe("topic1").await?;
     Ok(())
 }
 ```
@@ -77,6 +104,25 @@ Returns the value associated with the key or `None` if the key does not exist.
 Deletes a value from the cache.
 
 - `key`: The key to delete.
+
+#### `messaging.publish(&self, topic: &str, data: &str) -> Result<()>`
+
+Publishes a message to a topic.
+
+- `topic`: The topic to publish to.
+- `data`: The message data to publish.
+
+#### `messaging.subscribe(&self, topic: &str) -> Result<Receiver<String>>`
+
+Subscribes to a topic and returns a receiver for receiving messages.
+
+- `topic`: The topic to subscribe to.
+
+#### `messaging.unsubscribe(&self, topic: &str) -> Result<()>`
+
+Unsubscribes from a topic.
+
+- `topic`: The topic to unsubscribe from.
 
 ## Development
 
