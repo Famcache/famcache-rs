@@ -4,6 +4,7 @@ version = "1.0.0"
 description = "Official Famcache server client"
 license = "MIT"
 edition = "2021"
+categories = ["cache", "famcache", "client", "messaging"]
 
 [dependencies]
 anyhow = "1.0.86"

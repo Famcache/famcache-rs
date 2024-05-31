@@ -1,6 +1,9 @@
 module.exports = {
   branches: ['main'],
   plugins: [
+    ["@semantic-release/exec", {
+      "publishCmd": "cargo set-version ${nextRelease.version}"
+    }],
     '@semantic-release/commit-analyzer',
     '@semantic-release/release-notes-generator',
     '@semantic-release/changelog',
@@ -9,9 +12,6 @@ module.exports = {
       assets: ['Cargo.toml', 'CHANGELOG.md'],
       message: 'chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}',
     },
-    ["@semantic-release/exec", {
-      "publishCmd": "cargo set-version ${nextRelease.version}"
-    }],
     '@semantic-release/github',
     [
       "semantic-release-cargo",
