@@ -1,6 +1,6 @@
 [package]
 name = "famcache"
-version = "1.0.0"
+version = "1.1.8"
 description = "Official Famcache server client"
 license = "MIT"
 edition = "2021"
