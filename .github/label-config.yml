@@ -1,0 +1,13 @@
+documentation:
+  - changed-files:
+      - any-glob-to-any-file: "*.md"
+cache:
+  - changed-files:
+      - any-glob-to-any-file: ["src/query/*.rs", "src/commands/*.rs"]
+ci:
+  - changed-files:
+      - any-glob-to-any-file:
+          [".github/**/*", "release.config.cjs", "package.json"]
+core:
+  - changed-files:
+      - any-glob-to-any-file: ["src/lib.rs", "Cargo.toml"]
