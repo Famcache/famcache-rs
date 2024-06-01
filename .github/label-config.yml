@@ -11,3 +11,12 @@ ci:
 core:
   - changed-files:
       - any-glob-to-any-file: ["src/lib.rs", "Cargo.toml"]
+
+feature:
+  - head-branch: ["^feature", "feature"]
+
+fix:
+  - head-branch: ["^fix", "fix"]
+
+chore:
+  - head-branch: ["^chore", "chore"]
